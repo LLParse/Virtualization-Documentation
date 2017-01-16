@@ -13,4 +13,4 @@ WORKDIR /
 RUN powershell sqlcmd -S localhost,1433 -i Setup-blogdatabase.sql
 RUN powershell sqlcmd -S localhost,1433 -i Setup-blogtables.sql
 
-CMD powershell ./start -sa_password %sa_password% -attach_dbs \"%attach_dbs%\" -Verbose
+CMD powershell ./start -attach_dbs \"%attach_dbs%\" -Verbose

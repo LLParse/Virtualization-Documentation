@@ -11,10 +11,14 @@ RUN powershell -Command \
 	Expand-Archive -Path c:\BlogEngineNETSrc.zip -DestinationPath c:\inetpub\wwwroot\blogengine ; \
 	Remove-Item c:\BlogEngineNETSrc.zip -Force
 
+ADD ServiceMonitor.exe /ServiceMonitor.exe
+
 # Configure Web App
 COPY buildapp.ps1 C:/
 RUN powershell.exe C:\buildapp.ps1
 
 # Overwrite Web.config file so that web service points to db service
-COPY Web.config C:/inetpub/wwwroot/blogengine
+COPY Web.config.tmpl C:/inetpub/wwwroot/blogengine
 
+COPY run.ps1 C:/
+CMD ["powershell", "C:/run.ps1"]

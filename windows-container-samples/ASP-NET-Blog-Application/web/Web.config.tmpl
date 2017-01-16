@@ -7,9 +7,10 @@
     </sectionGroup>
   </configSections>
   <BlogEngine>
-    <blogProvider defaultProvider="DbBlogProvider">
+    <blogProvider defaultProvider="DbBlogProvider" fileStoreProvider="XmlBlogProvider">
       <providers>
-        <add connectionStringName="BlogEngine" description="Sql Database Provider" name="DbBlogProvider" type="BlogEngine.Core.Providers.DbBlogProvider, BlogEngine.Core" />
+        <add description="Xml Blog Provider" name="XmlBlogProvider" type="BlogEngine.Core.Providers.XmlBlogProvider, BlogEngine.Core" />
+        <add name="DbBlogProvider" type="BlogEngine.Core.Providers.DbBlogProvider, BlogEngine.Core" connectionStringName="BlogEngine" />
       </providers>
     </blogProvider>
     <blogFileSystemProvider defaultProvider="XmlBlogProvider">
@@ -20,7 +21,7 @@
   </BlogEngine>
   <connectionStrings>
     <clear />
-    <add name="BlogEngine" connectionString="Server=db;Database=blogengine_db;User ID=sa; Password=Password123;Integrated Security=False" providerName="System.Data.SqlClient" />
+    <add name="BlogEngine" connectionString="Server=BLOG_DB_SERVER;Database=blogengine_db;User ID=sa;Password=BLOG_DB_PASSWORD;Integrated Security=False" providerName="System.Data.SqlClient" />
   </connectionStrings>
   <appSettings>
     <!-- Override default application settings here -->
@@ -104,7 +105,7 @@
         <add assembly="BlogEngine.NET" namespace="App_Code.Controls" tagPrefix="blog" />
       </controls>
     </pages>
-    <customErrors mode="Off" defaultRedirect="~/error.aspx" redirectMode="ResponseRewrite">
+    <customErrors mode="RemoteOnly" defaultRedirect="~/error.aspx" redirectMode="ResponseRewrite">
       <error statusCode="404" redirect="~/error404.aspx" />
     </customErrors>
     <!--<trust level="Medium"/>-->
